@@ -8,14 +8,14 @@ const mongoose = require('mongoose');
 const ejs = require('ejs');
 
 //  DB connection
-// mongoose.connect('mongodb://localhost:27017/testdb', { useNewUrlParser: 'true' });
-// mongoose.connection.on('error', err => {
-//   console.log('err', err);
-// });
+mongoose.connect('mongodb://localhost:27017/testdb', { useNewUrlParser: 'true' });
+mongoose.connection.on('error', err => {
+  console.log('err', err);
+});
 
-// mongoose.connection.on('connected', (err, res) => {
-//   console.log('mongoose is connected');
-// });
+mongoose.connection.on('connected', (err, res) => {
+  console.log('mongoose is connected');
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
