@@ -5,7 +5,8 @@ const app = express();
 const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
-const ejs = require('ejs');
+
+const Books = require('./controller/books');
 
 //  DB connection
 mongoose.connect('mongodb://localhost:27017/testdb', { useNewUrlParser: 'true' });
@@ -26,14 +27,7 @@ app.use(express.static('views'));
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
 
-app.get('/', function(req, res) {
-  res.render('create_book.ejs');
-});
-app.use(expressLayouts);
-const async = require('async');
-const Books = require('./controller/books');
-
-app.use('/books', Books);
+app.use('/', Books);
 
 app.listen(3000, () => {
   console.log(`server started at port${3000}`);
