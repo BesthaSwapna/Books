@@ -24,9 +24,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // ejs layout
-app.set('views', path.join(__dirname, '/view'));
+app.use(express.static('view'));
+app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
-app.set('layout', 'layouts/layout');
 
 app.get('/', function(req, res) {
   res.render('create_book.ejs');

@@ -3,22 +3,20 @@ const router = express.Router();
 const Books = require("../Model/books_model")
 
 router.get('/', async (req, res) => {
+  console.log("hi")
   var books = await BooksModel.find({});
   res.render("create_book")
 });
 
 router.post('/create', async (req, res) => {
   const { bookName, cost, auth } = req.body;
-
   var NewProduct = new Books({ bookName, cost, auth });
   try {
     const book = await Books.create(NewProduct);
-    res.json({
-      success: true,
-      message: 'add sucessfully.',
-      book
-    });
-
+    if(book){
+      // req.flash("message", " Equipment Characteristic have been saved successfully");
+			res.render("books/create_book", { book:book });
+  }
   } catch (error) {
     res.json({
       success: false,
